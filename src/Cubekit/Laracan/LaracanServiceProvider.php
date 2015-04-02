@@ -18,8 +18,8 @@ class LaracanServiceProvider extends ServiceProvider {
 
             return $this->getPermissions();
         });
-//
-//        $this->extendBlade();
+
+        $this->extendBlade();
     }
 
     private function getPermissions()
