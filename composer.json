@@ -16,5 +16,5 @@
             "Cubekit\\Laracan\\": "src/Cubekit/Laracan"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
