@@ -5,8 +5,6 @@ use Illuminate\Support\ServiceProvider;
 
 class LaracanServiceProvider extends ServiceProvider {
 
-    private $permissions = null;
-
     public function boot()
     {
         require __DIR__ . '/helpers.php';
@@ -18,22 +16,12 @@ class LaracanServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $this->app->bind('permissions', function() {
-
-            return $this->getPermissions();
+        $this->app->singleton('permissions', function()
+        {
+            return $this->makePermissions();
         });
 
         $this->extendBlade();
-    }
-
-    private function getPermissions()
-    {
-        if ( ! $this->permissions) {
-
-            $this->permissions = $this->makePermissions();
-        }
-
-        return $this->permissions;
     }
 
     private function makePermissions()
@@ -42,8 +30,8 @@ class LaracanServiceProvider extends ServiceProvider {
 
         $user = app('auth')->user();
 
-        $this->makeAbility()->initialize($user, function() use ($permissions) {
-
+        $this->makeAbility()->initialize($user, function() use ($permissions)
+        {
             call_user_func_array( [$permissions, 'add'], func_get_args() );
         });
 
