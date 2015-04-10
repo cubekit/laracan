@@ -19,29 +19,10 @@ class LaracanServiceProvider extends ServiceProvider {
     {
         $this->app->singleton('permissions', function()
         {
-            return $this->makePermissions();
+            return AbilityInitializer::initialize();
         });
 
         CanTag::register();
-    }
-
-    private function makePermissions()
-    {
-        $permissions = new Permissions;
-
-        $user = app('auth')->user();
-
-        $this->makeAbility()->initialize($user, function() use ($permissions)
-        {
-            call_user_func_array( [$permissions, 'add'], func_get_args() );
-        });
-
-        return $permissions;
-    }
-
-    private function makeAbility()
-    {
-        return $this->app->make( config('cubekit.laracan.ability') );
     }
 
 }
