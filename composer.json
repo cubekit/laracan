@@ -1,6 +1,7 @@
 {
     "name": "cubekit/laracan",
     "description": "Easy define abilities of the current user.",
+    "keywords": ["permissions", "laravel"],
     "authors": [
         {
             "name": "Anatoliy Arkhipov",
