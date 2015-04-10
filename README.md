@@ -95,6 +95,7 @@ class EditPostRequest {
 @foreach($post->comments as $comment)
 
 <div class="comment">
+
     <div class="comment-body">{{ $comment->body }}</div>
 
     @can('edit', $comment)
@@ -105,6 +106,10 @@ class EditPostRequest {
 
     @endcan
 
+    </div>
+
+</div>
+
 @endforeach
 ```
 
@@ -114,6 +119,7 @@ class EditPostRequest {
 @foreach($post->comments as $comment)
 
 <div class="comment">
+
     <div class="comment-body">{{ $comment->body }}</div>
 
     @if( can('edit', $comment) )
@@ -123,6 +129,10 @@ class EditPostRequest {
         </div>
 
     @endif
+
+    </div>
+
+</div>
 
 @endforeach
 ```
