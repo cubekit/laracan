@@ -8,7 +8,7 @@ class LaracanServiceProvider extends ServiceProvider {
 
     public function boot()
     {
-        require __DIR__ . '/helpers.php';
+        require __DIR__ . '/../../helpers.php';
 
         $this->publishes([
             __DIR__ . '/../../config/config.php' => config_path('cubekit/laracan.php'),
