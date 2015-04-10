@@ -1,7 +1,8 @@
 <?php namespace Cubekit\Laracan;
 
-use Blade;
 use Illuminate\Support\ServiceProvider;
+
+use Cubekit\Laracan\Template\CanTag;
 
 class LaracanServiceProvider extends ServiceProvider {
 
@@ -21,7 +22,7 @@ class LaracanServiceProvider extends ServiceProvider {
             return $this->makePermissions();
         });
 
-        $this->extendBlade();
+        CanTag::register();
     }
 
     private function makePermissions()
@@ -41,19 +42,6 @@ class LaracanServiceProvider extends ServiceProvider {
     private function makeAbility()
     {
         return $this->app->make( config('cubekit.laracan.ability') );
-    }
-
-    private function extendBlade()
-    {
-        Blade::extend(function($view, $compiler)
-        {
-            $canPattern = $compiler->createMatcher('can');
-            $endCanPattern = $compiler->createPlainMatcher('endcan');
-
-            $view = preg_replace($canPattern, '$1<?php if(can$2): ?>', $view );
-
-            return preg_replace($endCanPattern, '$1<?php endif; ?>', $view);
-        });
     }
 
 }
