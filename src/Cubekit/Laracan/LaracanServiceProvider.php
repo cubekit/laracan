@@ -10,6 +10,10 @@ class LaracanServiceProvider extends ServiceProvider {
     public function boot()
     {
         require __DIR__ . '/helpers.php';
+
+        $this->publishes([
+            __DIR__ . '/../../config/config.php' => config_path('cubekit/laracan.php'),
+        ]);
     }
 
     public function register()
@@ -48,7 +52,7 @@ class LaracanServiceProvider extends ServiceProvider {
 
     private function makeAbility()
     {
-        return $this->app->make( app('config')->get('laracan.ability') );
+        return $this->app->make( config('cubekit.laracan.ability') );
     }
 
     private function extendBlade()
